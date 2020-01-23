@@ -1,0 +1,37 @@
+<p>{{"testing the values"+isSelected}}</p>
+<button [class]="isSelected?'btn btn-primary':'btn'" (click)=onClick()>check</button>
+<!-- directives are of two types structural and attribute
+1.structural -- modify the structure of the dom
+2. attribute -- modify the attribute of the dom element-->
+<div *ngIf="courses.length>0; then available else zero"></div>
+<ng-template #available>Courses available</ng-template>
+<ng-template #zero>No courses available</ng-template>
+<!--ngif can be used in the case of large tree dom element hidden property is the known property 
+    can b used instead of ngif when it has a smaller dom tree -->
+    <div [hidden]="courses.length>0"> Courses available</div>
+    <div [hidden]="courses.length ==0">No courses available</div>
+<ul class="nav nav-tabs">
+    <li [class.active]="viewMode=='map'"><a (click)="viewMode='map'">Map View</a></li>
+    <li [class.active]="viewMode=='list'"><a (click)="viewMode='list'">List View</a></li>
+</ul>
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map view content</div>
+    <div *ngSwitchCase="'list'">List view content</div>
+    <div *ngSwitchDefault>otherwise</div>
+</div>
+<button class="btn btn-primary" (click)=getCourses()>Show Courses</button>
+<br>
+<!-- angular has a concept called change detection which is used to track all the event change happen 
+in dom whether it is event change or timer but it is done by checking the memory of the object and hence the 
+same value will be load into dom again nd again. if we want to improve the performance we can done by using
+ trackby keyword-->
+ <!-- ngclass nd ngStyle are attrbute binding which changes dom by changin the attribute
+example [ngClass]={btn btn-primary:isSelected, btn:!isSelected} [ngStyle]={backgroundcolor=isBlue?blue:red}-->
+<!-- safe traversal operator is used in case of ngdirectives in complex dom objects
+instead of ngif for checking the object presence we can use by following syntax ?{{trainee.name?.id}} -->
+<ul>
+    <li *ngFor="let course of courseArray; trackBy: trackCourse">{{course.name}}
+            <button class="btn" (click)=updateCourses()>Remove Courses</button>
+    </li>
+</ul>
+<button class="btn btn-primary" (click)=addCourses()>add Courses</button>

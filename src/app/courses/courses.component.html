@@ -1,0 +1,61 @@
+<html>
+  <!--  property binding can b achieved in two ways string interpolation and using []
+     String interpolation is used to render string values in p,div. span tags using following syntax {{}} 
+     we can use [] in the case for attribute binding and other things both stands for one way binding
+     the changes made in the one way binding is from component -> dom only not vice versa 
+  -->
+<p>
+  {{'To check interpolation' + coursetitle}}
+</p>
+<p [textContent]="coursetitle"></p>
+<!--below is the example for directives. These directives need to be declared with * at the front-->
+<ul>
+  <li *ngFor="let course of courses" >{{course}}</li>
+</ul>
+<br> 
+<p [style.backgroundcolor]="isActive?'blue':'red'"> Taken the value from service call</p>
+<ul>
+  <li *ngFor="let course of serviceCourse">{{ course }}</li>
+</ul> 
+<table>
+  <!--few dom object dont have representation in html and viceversa is also ter
+    html element dont have the dom object representation below is the example for the same,
+  In those cases we can modify the html attrbitue by attr.attribute name 
+   above text content property binder dint woork for li tag but worked for p and h tag
+  class binding can be done by adding class. name
+  style binding can be added by[style.] inside the tag as attribute-->
+  <th>some attributes dont have representation in dom object</th>
+  <tr>
+    <td [attr.colspan]="colSpan">worked fine</td>
+  </tr>
+</table>
+<div>
+<button (click)=onSave($event) class="btn btn-primary" [class.active]="isActive">save</button></div>
+
+<!-- below example is for event filtering with keyup event example
+Instead of fetching the event and writting the logic based on it, we can filter the event as below
+keyup.enter for enter button-->
+<!-- template variable we can fetch the value inside the text box by passing the event and in ts we can get the
+value by $event.target.value but in angular we can get the value by referring to template as below
+we can refer the template by using #-->
+<input #userName (keyup.enter)=onKeyUp(userName.value) type="text" placeholder="Username"/>
+<br>
+<!-- two way binding can be achieved thru ngmodel directive.. directive usually manipulates dom
+to provide a view popularly 2waqy binding is referred as banana in the box to remember it easily-->
+<input [(ngModel)]=email type="text"/>
+<button (click)=verifyEmail() class='btn-primary'>Valid Email</button>
+
+<!--  pipes are used to align the view of the data we can implement using a | symbol with it
+   we can create our own custom pipe as the below example -->
+   <p>{{summary | SummaryPipe:10}}</p>
+<!-- dynamic component dont have properties of html, it is created by us and hence if we need to send component to
+view or view to component we need to create those properties explicitly by using @input for binding property
+@output for triggering event to the compoent-->
+<app-favourite [isFavourite]="post.favourite" (change)="onEmitEvent($event)">
+  <!--if you want to transfer tags from this component to another component we can use ng-content tag
+  of angular example <ng-content class="heading"></nng-content> in the source component and in the target 
+  component <div select=.heading></div> this select attribute gives hint to ng-content to replace the tag
+when you inspect the element in the browser, this ng-content tag will present inside the <div> tag,
+  if you dont want the tag to be shown at the browser, you can use the ng-container tag-->
+</app-favourite>
+</html> 
