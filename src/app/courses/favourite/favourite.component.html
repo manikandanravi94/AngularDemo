@@ -52,6 +52,8 @@ directly assign that to directive as shown below
     like valid pristine errors etc, we can use those for validations
 -->
 <form #f="ngForm" (ngSubmit)="submit(f)"> 
+    <!-- model group can be applied to the complex forms, we can segregate the shipping details from contact 
+        detail form their corresponding validations can be done at the same area-->
     <div ngModelGroup="contact">
     <div class="form-group">
         <label for="firstName">FirstName</label>
@@ -65,7 +67,7 @@ directly assign that to directive as shown below
 </div>
     <div class="form-group">
         <label for="comment">Comment</label>
-        <textarea ngModel name="comment" id="comment" cols="30" rows="10" #comment="ngModel"
+        <textarea ngModel name="comment" id="comment" cols="30" rows="2" #comment="ngModel"
             class="form-control"></textarea>
     </div>
     <div class="checkbox">
@@ -78,7 +80,7 @@ directly assign that to directive as shown below
     if we want to bind complex object, we need to use [ngValue] to bind it-->
     <div class="form-group" *ngFor="let country of countryList">
             <label>
-            <input ngModel name="Country" id="contactMethod" type="radio" [value]="country.id">{{country.name}}
+            <input ngModel name="Country" type="radio" [value]="country.id">{{country.name}}
         </label>
         </div>
     <div class="form-group">
