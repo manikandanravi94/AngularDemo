@@ -2,6 +2,10 @@
 <div class="form-group">
   <label for="username">Username</label>
   <input class="form-control" formControlName="username" type="text" name="username" id="username"/>
+  <!-- this is the noisy code which is writing lots of code inside template  and this can be replaced with the 
+    below code
+    <div class="alert alert-danger" *ngIf="form.get('username').touched && form.get('username').invalid">Enter the username</div> -->
+    <div class="alert alert-danger" *ngIf="username.touched && username.invalid">Enter the username</div>
 </div>
 <div class="form-group">
     <label for="password">password</label>
