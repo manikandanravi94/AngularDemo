@@ -8,8 +8,8 @@
 <ng-template #zero>No courses available</ng-template>
 <!--ngif can be used in the case of large tree dom element hidden property is the known property 
     can b used instead of ngif when it has a smaller dom tree -->
-    <div [hidden]="courses.length>0"> Courses available</div>
-    <div [hidden]="courses.length ==0">No courses available</div>
+<div [hidden]="courses.length>0"> Courses available</div>
+<div [hidden]="courses.length ==0">No courses available</div>
 <ul class="nav nav-tabs">
     <li [class.active]="viewMode=='map'"><a (click)="viewMode='map'">Map View</a></li>
     <li [class.active]="viewMode=='list'"><a (click)="viewMode='list'">List View</a></li>
@@ -25,13 +25,69 @@
 in dom whether it is event change or timer but it is done by checking the memory of the object and hence the 
 same value will be load into dom again nd again. if we want to improve the performance we can done by using
  trackby keyword-->
- <!-- ngclass nd ngStyle are attrbute binding which changes dom by changin the attribute
+<!-- ngclass nd ngStyle are attrbute binding which changes dom by changin the attribute
 example [ngClass]={btn btn-primary:isSelected, btn:!isSelected} [ngStyle]={backgroundcolor=isBlue?blue:red}-->
 <!-- safe traversal operator is used in case of ngdirectives in complex dom objects
 instead of ngif for checking the object presence we can use by following syntax ?{{trainee.name?.id}} -->
 <ul>
     <li *ngFor="let course of courseArray; trackBy: trackCourse">{{course.name}}
-            <button class="btn" (click)=updateCourses()>Remove Courses</button>
+        <button class="btn" (click)=updateCourses()>Remove Courses</button>
     </li>
 </ul>
 <button class="btn btn-primary" (click)=addCourses()>add Courses</button>
+<br><br>
+<!--below is the example for custom directive which can be achieved by host listener object in ts and
+the property can be bind through normal way ex [pattern]="'uppercase'".. since there is only one property we can
+directly assign that to directive as shown below
+-->
+<input [appInputformat]="'upperCase'" type="text" placeholder="Custom directive"/>
+
+<!--template driven form is used by adding ngModel without brackets in the tag, 
+    we should add the ngmodel with name else we will receive an error
+    # is template reference variable once we assign the value to this variable we can use it in TS to see the 
+    formcontrol object completely.. form control object is a function which keeps all the information of the fiels
+    ex: whether it is touched, valid, error, pristine(opposite to touched)
+    required is the functionality of html 5, we can use it for validation by referring the form control object
+    ngForm collects all the form elements in it and provides all the option which are provided in form control
+    like valid pristine errors etc, we can use those for validations
+-->
+<form #f="ngForm" (ngSubmit)="submit(f)"> 
+    <div ngModelGroup="contact">
+    <div class="form-group">
+        <label for="firstName">FirstName</label>
+        <input required minlength="3" maxlength="10" pattern="mani" ngModel name="firstName" id="firstName"
+            #firstName="ngModel" class="form-control" (change)="log(firstName)" type="text"/>
+         <div class="alert alert-danger" *ngIf="!firstName.valid&&firstName.touched">first name is required</div>
+         <div class="alert alert-danger" *ngIf="firstName.errors?.pattern">pattern not matching the criteria</div> 
+        <div *ngIf="firstName.errors?.minlength">Minimum length of the name should be
+            {{firstName.errors.minlength.requiredLength}}</div>
+    </div>
+</div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea ngModel name="comment" id="comment" cols="30" rows="10" #comment="ngModel"
+            class="form-control"></textarea>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" ngModel name="isSubscribed">subscribe to mailing
+        </label>
+    </div>
+    <!-- everywhere we use ngModel with name attrbute formcontrol object will be assigned to the dom element
+        if yu want to bind smaller values instead of the object we can use value property binding
+    if we want to bind complex object, we need to use [ngValue] to bind it-->
+    <div class="form-group" *ngFor="let country of countryList">
+            <label>
+            <input ngModel name="Country" id="contactMethod" type="radio" [value]="country.id">{{country.name}}
+        </label>
+        </div>
+    <div class="form-group">
+        <label>Contact Method</label>
+        <select ngModel name="contactMethod" id="contactMethod">
+            <option value="">
+        <option *ngFor="let method of methodList" [value]="method.id">{{method.name}}
+        </select>
+    </div>
+    <p>{{f.value |json}}</p>
+    <button type="submit" class="btn btn-success" [disabled]="!f.valid">submit</button>
+</form>

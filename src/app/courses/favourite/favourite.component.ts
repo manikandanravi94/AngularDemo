@@ -14,6 +14,10 @@ export class FavouriteComponent implements OnInit {
 //'angular','java'
   courses=['angular','java'];
 
+   methodList=[{id:1, name:"Email"},{id:2, name:"Mobile"}];
+
+   countryList=[{id:1, name:"INDIA"},{id:2, name:"USA"}];
+
   courseArray:any;
 
   viewMode='map';
@@ -44,4 +48,12 @@ export class FavouriteComponent implements OnInit {
   return course ? course.id:undefined;
   }
 
+  log(firstName){
+    console.log(firstName);
+  }
+
+  submit(f)
+{
+  console.log(f);
+}
 }

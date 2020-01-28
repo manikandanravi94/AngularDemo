@@ -12,11 +12,11 @@ import { CourseService } from './courseservice.service';
 })
 export class CoursesComponent implements OnInit {
 
-  serviceCourse:string[];
-
   constructor(courseService: CourseService) {
     this.serviceCourse=courseService.getCourses();
    }
+
+  serviceCourse:string[];
 
   ngOnInit() {
   }
