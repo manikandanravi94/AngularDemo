@@ -1,12 +1,18 @@
 <form [formGroup]="form">
 <div class="form-group">
   <label for="username">Username</label>
-  <input class="form-control" formControlName="username" type="text" name="username" id="username"/>
+  <input class="form-control" formControlName="username" type="text" name="username" id="username" (blur)=log()/>
   <!-- this is the noisy code which is writing lots of code inside template  and this can be replaced with the 
     below code
     <div class="alert alert-danger" *ngIf="form.get('username').touched && form.get('username').invalid">Enter the username</div> -->
-    <div class="alert alert-danger" *ngIf="username.touched && username.invalid">Enter the username</div>
-</div>
+    <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+    <div class="alert alert-danger" *ngIf="username.errors.required">username is required</div>
+    <div class="alert alert-danger" *ngIf="username.errors.cannotContainSpace">username cannot contain space</div>
+    <div class="alert alert-danger" *ngIf="username.errors.minlength">Minimum length of the username should be
+      under {{username.errors.minlength.requiredLength}}
+    </div>
+    </div>
+  </div>
 <div class="form-group">
     <label for="password">password</label>
     <input class="form-control" formControlName="password" type="password" name="password" id="password"/>
