@@ -10,6 +10,7 @@ import { SummaryPipe } from './Custompipes/SummaryPipe';
 import { FavouriteComponent } from './courses/favourite/favourite.component';
 import { InputformatDirective } from './directives/inputformat.directive';
 import { SignupFormComponentComponent } from './signup-form-component/signup-form-component.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SignupFormComponentComponent } from './signup-form-component/signup-for
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,FormsModule, ReactiveFormsModule
+    AppRoutingModule,FormsModule, ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [CourseService],
   bootstrap: [AppComponent]

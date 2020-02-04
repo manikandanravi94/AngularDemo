@@ -12,11 +12,57 @@ import { CourseService } from './courseservice.service';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor(courseService: CourseService) {
-    this.serviceCourse=courseService.getCourses();
+  constructor(private courseService: CourseService) {
+    
    }
 
-  serviceCourse:string[];
+   private url:string="http://jsonplaceholder.typicode.com/users";
+
+  serviceUserList:any[];
+ 
+/* callback function is used to look for the response from the server irrespective of killing the working thread
+angular function will be passed as a argument to the service layer where inside the subscribe method this 
+method vl b executed*/
+  // getServiceList(){
+  //   this.courseService.getUsersList((userList) => {
+  //     this.serviceUserList=userList;
+  //   });
+  //   }
+
+  getServiceList(){
+    this.courseService.getUsersList(this.url).subscribe(response =>{
+      this.serviceUserList=response;
+    });
+    }
+    /*
+    adding the user into the list of user example.. since the service is for demo purpose, 
+    we can use that value for testing.. it will work only during that instance
+     since we are using the array to show list.. we are using push method to insert value
+
+    */
+    postUser(input:HTMLInputElement){
+      let post={title: input.value};
+      let postResponse=this.courseService.postUser(this.url,JSON.stringify(post));
+      postResponse.subscribe(response=>{
+        post['name']=response.id;
+        this.serviceUserList.splice(0,0,post);
+      })
+    }
+
+    updateUser(postObj){
+      let updateResponse=this.courseService.updateUser(this.url,postObj);
+      updateResponse.subscribe(response =>{
+        console.log(response);
+      })
+    }
+
+    deleteUser(postObj){
+     this.courseService.deleteUser(this.url,postObj.id).subscribe(response =>{
+       console.log(response);
+       let index = this.serviceUserList.indexOf(postObj);
+       this.serviceUserList.splice(index,1)
+     })
+    }
 
   ngOnInit() {
   }

@@ -10,10 +10,14 @@
     can b used instead of ngif when it has a smaller dom tree -->
 <div [hidden]="courses.length>0"> Courses available</div>
 <div [hidden]="courses.length ==0">No courses available</div>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="collapse navbar-collapse" id="navbarsExample03">
 <ul class="nav nav-tabs">
     <li [class.active]="viewMode=='map'"><a (click)="viewMode='map'">Map View</a></li>
     <li [class.active]="viewMode=='list'"><a (click)="viewMode='list'">List View</a></li>
 </ul>
+</div>
+</nav>
 <div [ngSwitch]="viewMode">
     <div *ngSwitchCase="'map'">Map view content</div>
     <div *ngSwitchCase="'list'">List view content</div>

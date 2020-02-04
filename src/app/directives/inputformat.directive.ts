@@ -1,5 +1,9 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
+/*
+directives can be applied on events and pipes are not like that.. it vl b applied instantly to the value
+*/
+
 @Directive({
   selector: '[appInputformat]'
 })

@@ -1,7 +1,11 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="login()">
+  <div class="alert alert-danger" *ngIf="form.errors">{{form.errors.invalidUser}}</div>
 <div class="form-group">
   <label for="username">Username</label>
   <input class="form-control" formControlName="username" type="text" name="username" id="username" (blur)=log()/>
+  <!-- since username reflects the instane of form control, it has a property called pending thru wihch we can
+  verify whether the asynchronous call is wrkng crctly or not-->
+  <div *ngIf="username.pending">checking for uniqueness...</div>
   <!-- this is the noisy code which is writing lots of code inside template  and this can be replaced with the 
     below code
     <div class="alert alert-danger" *ngIf="form.get('username').touched && form.get('username').invalid">Enter the username</div> -->
@@ -11,10 +15,12 @@
     <div class="alert alert-danger" *ngIf="username.errors.minlength">Minimum length of the username should be
       under {{username.errors.minlength.requiredLength}}
     </div>
+    <div class="alert alert-danger" *ngIf="username.errors.shouldBeUnique">username already taken</div>
     </div>
   </div>
 <div class="form-group">
     <label for="password">password</label>
     <input class="form-control" formControlName="password" type="password" name="password" id="password"/>
   </div>
+  <button class="btn btn-primary">submit</button>
 </form>
