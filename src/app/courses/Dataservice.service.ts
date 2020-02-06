@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { stringify } from 'querystring';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 //@Injectable is added to the service, it is because if this constructor hav any dependency it need to be
 // injected internally. we r not adding this annotation to component because it itself internally calls the 
 // injectable annotation
@@ -8,10 +10,7 @@ import { stringify } from 'querystring';
 @Injectable({
   providedIn: 'root'
 })
-export class CourseService {
-
-  usersList:any;
-
+export class DataService {
   
 
   constructor(private http: HttpClient) { 
@@ -31,11 +30,27 @@ event at the component
   // }
 
   getUsersList(url):any{
-   return this.http.get(url);
+    /*below commented can be applied to each service specifically not to all the service commonly and 
+     hence this is not a proper way of coding,we can achieve the common way by httpinterceptor
+   return this.http.get(url).pipe(retry(1),catchError(this.handleError));
+     */
+    return this.http.get(url);
   }
 
   postUser(url:string,body):any{
     return this.http.post(url,body);
+  }
+  handleError(error: any): any {
+    let errorMessage='';
+    if(error.error instanceof ErrorEvent)
+{
+  errorMessage='Error: ${error.error.message}';
+}
+else{
+  errorMessage='Error code: ${error.status}\nMessage: ${error.message}';
+}
+    window.alert(errorMessage);
+    return throwError(errorMessage);
   }
 
   updateUser(url:string,body):any{

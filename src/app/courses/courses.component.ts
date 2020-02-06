@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from './courseservice.service';
+import { DataService } from './Dataservice.service';
 
 //@component is a decorator which need to be specified while defining the component
 // 2. component need to b registered in module declaration
@@ -12,11 +12,11 @@ import { CourseService } from './courseservice.service';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor(private courseService: CourseService) {
+  constructor(private DataService: DataService) {
     
    }
 
-   private url:string="http://jsonplaceholder.typicode.com/users";
+   private url:string="http://abcdjsonplaceholder.typicode.com/users";
 
   serviceUserList:any[];
  
@@ -24,13 +24,13 @@ export class CoursesComponent implements OnInit {
 angular function will be passed as a argument to the service layer where inside the subscribe method this 
 method vl b executed*/
   // getServiceList(){
-  //   this.courseService.getUsersList((userList) => {
+  //   this.DataServic.getUsersList((userList) => {
   //     this.serviceUserList=userList;
   //   });
   //   }
 
   getServiceList(){
-    this.courseService.getUsersList(this.url).subscribe(response =>{
+    this.DataService.getUsersList(this.url).subscribe(response =>{
       this.serviceUserList=response;
     });
     }
@@ -42,7 +42,8 @@ method vl b executed*/
     */
     postUser(input:HTMLInputElement){
       let post={title: input.value};
-      let postResponse=this.courseService.postUser(this.url,JSON.stringify(post));
+      let postResponse=this.DataService
+.postUser(this.url,JSON.stringify(post));
       postResponse.subscribe(response=>{
         post['name']=response.id;
         this.serviceUserList.splice(0,0,post);
@@ -50,14 +51,16 @@ method vl b executed*/
     }
 
     updateUser(postObj){
-      let updateResponse=this.courseService.updateUser(this.url,postObj);
+      let updateResponse=this.DataService
+.updateUser(this.url,postObj);
       updateResponse.subscribe(response =>{
         console.log(response);
       })
     }
 
     deleteUser(postObj){
-     this.courseService.deleteUser(this.url,postObj.id).subscribe(response =>{
+     this.DataService
+.deleteUser(this.url,postObj.id).subscribe(response =>{
        console.log(response);
        let index = this.serviceUserList.indexOf(postObj);
        this.serviceUserList.splice(index,1)
