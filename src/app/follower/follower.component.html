@@ -1,0 +1,7 @@
+<h2>followers List</h2>
+<h6>Touch their name to go to their github url</h6>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let follower of coursesFollowers">
+    <a [attr.href]="follower.url" class="list-group-item list-group-item-action"><div>{{follower.name}}</div></a>
+  </li>
+</ul>

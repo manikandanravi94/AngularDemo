@@ -4,10 +4,27 @@
      we can use [] in the case for attribute binding and other things both stands for one way binding
      the changes made in the one way binding is from component -> dom only not vice versa 
   -->
+
+
+
 <p>
   {{'To check interpolation' + coursetitle}}
-</p>
+</p><br>
 <p [textContent]="coursetitle"></p>
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
+            [routerLink]="['/follower','java']" [queryparam]='page'>Java followers</a></li>
+            <!--normal path param can be passed to ts by property binding of router link
+            query param can be passed only through [queryparam]='value' it will be received at ts as
+          path param -->
+        <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
+          [routerLink]="['/follower','python']">Python followers</a></li>
+      </ul>
+    </div>
+  </nav>
 <!--below is the example for directives. These directives need to be declared with * at the front-->
 <ul>
   <li *ngFor="let course of courses">{{course}}</li>
@@ -68,9 +85,9 @@
   <div class="collapse navbar-collapse" id="navbarsExample03">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" [class.active]="viewMode=='favourite'"><a class="nav-link"
-          (click)="viewMode='favourite'">Favourite</a></li>
+          (click)="viewMode='favourite'">Template Form</a></li>
       <li class="nav-item" [class.active]="viewMode=='signup'"><a class="nav-link"
-          (click)="viewMode='signup'">Signup</a></li>
+          (click)="viewMode='signup'">Reactive Form</a></li>
     </ul>
   </div>
 </nav>

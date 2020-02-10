@@ -12,11 +12,15 @@ import { InputformatDirective } from './directives/inputformat.directive';
 import { SignupFormComponentComponent } from './signup-form-component/signup-form-component.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from './common/httpErrorInterceptor';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { HeaderComponent } from './header/header.component';
+import { FollowerComponent } from './follower/follower.component';
+import { GithubprofileComponent } from './githubprofile/githubprofile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent
+    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent, NotFoundComponent, HeaderComponent, FollowerComponent, GithubprofileComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ export class CoursesComponent implements OnInit {
     
    }
 
-   private url:string="http://abcdjsonplaceholder.typicode.com/users";
+   private url:string="http://jsonplaceholder.typicode.com/users";
 
   serviceUserList:any[];
  

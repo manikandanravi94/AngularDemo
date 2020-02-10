@@ -1,0 +1,15 @@
+        <!--
+          we can use router link attribute to navigate to the normal url path, if we are planning to nav
+          to the url with query param we have to use property binding of router link and pass the url and 
+          parameters as array elements(as an expression to bind instead of string)
+        -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarsExample03">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
+          routerLink="/courses">Courses</a></li>
+      <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
+        routerLink="/signup">Signup</a></li>
+    </ul>
+  </div>
+</nav>
