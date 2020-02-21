@@ -5,8 +5,9 @@ import { retry, catchError } from 'rxjs/operators';
 
 export class HttpErrorInterceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>>{
+        debugger;
         return next.handle(request)
-        .pipe(retry(1), catchError((error: HttpErrorResponse)=>{
+        .pipe(catchError((error: HttpErrorResponse)=>{
             let errorMessage='';
             if(error.error instanceof ErrorEvent){
                 errorMessage = `Error: ${error.error.message}`;

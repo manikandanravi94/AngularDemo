@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { stringify } from 'querystring';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
@@ -29,6 +29,12 @@ event at the component
   //   });
   // }
 
+   httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
+
   getUsersList(url):any{
     /*below commented can be applied to each service specifically not to all the service commonly and 
      hence this is not a proper way of coding,we can achieve the common way by httpinterceptor
@@ -38,7 +44,7 @@ event at the component
   }
 
   postUser(url:string,body):any{
-    return this.http.post(url,body);
+    return this.http.post(url,body,this.httpOptions);
   }
   handleError(error: any): any {
     let errorMessage='';

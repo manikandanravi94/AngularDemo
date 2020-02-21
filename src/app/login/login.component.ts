@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../courses/Dataservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { DataService } from '../courses/Dataservice.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: DataService) { }
+  constructor(private service: DataService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -29,15 +30,18 @@ export class LoginComponent implements OnInit {
 
   body:any;
 
-  url: string = "http://localhost:8080/api/authenticate";
+  url: string = "http://localhost:8090/demo/api/authenticate";
   
   submitForm(){
-    this.body={name:
+    this.body={username:
       this.username.value,
-      passkey: this.password.value
+      password: this.password.value
     };
      this.service.postUser(this.url,JSON.stringify(this.body)).subscribe(response =>{
-       console.log(response);}
+    if(response.status=="OK"){
+      
+    }   
+    }
      );
   }
 
