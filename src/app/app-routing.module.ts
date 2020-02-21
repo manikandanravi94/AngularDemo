@@ -5,16 +5,21 @@ import { SignupFormComponentComponent } from './signup-form-component/signup-for
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FollowerComponent } from './follower/follower.component';
 import { GithubprofileComponent } from './githubprofile/githubprofile.component';
+import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   {
-    path:"", component: CoursesComponent
+    path:"", component: HeaderComponent
   },
   {
     path: "courses", component: CoursesComponent
   },
   {
     path: "signup", component: SignupFormComponentComponent
+  },
+  {
+    path:"login", component: LoginComponent
   },
   {
     path: "follower/:course", component: FollowerComponent

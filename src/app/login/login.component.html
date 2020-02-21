@@ -1,0 +1,18 @@
+<p>
+  login works!
+</p>
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="form-group">
+    <label for="username">UserName</label>
+<input class="form-control" type="text" formControlName="username" name="username" id="username"/>
+<div *ngIf="username.touched&&username.invalid">
+<div class="alert alert-danger" *ngIf="username.errors.minlength">username is not matching the min length</div>
+<div class="alert alert-danger" *ngIf="username.errors.required">username must be filled</div>
+</div>
+</div>
+<div class="form-group">
+  <label for="password">Password</label>
+<input type="text" class="form-control" formControlName="password" name="password" id="password">
+</div>
+<button type="submit" class="btn btn-primary">signin</button> 
+</form> 

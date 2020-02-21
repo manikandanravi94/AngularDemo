@@ -16,11 +16,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HeaderComponent } from './header/header.component';
 import { FollowerComponent } from './follower/follower.component';
 import { GithubprofileComponent } from './githubprofile/githubprofile.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent, NotFoundComponent, HeaderComponent, FollowerComponent, GithubprofileComponent
+    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent, NotFoundComponent, HeaderComponent, FollowerComponent, GithubprofileComponent, LoginComponent
   ],
   imports: [
     BrowserModule,
