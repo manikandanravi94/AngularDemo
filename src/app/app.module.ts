@@ -17,11 +17,13 @@ import { HeaderComponent } from './header/header.component';
 import { FollowerComponent } from './follower/follower.component';
 import { GithubprofileComponent } from './githubprofile/githubprofile.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent, NotFoundComponent, HeaderComponent, FollowerComponent, GithubprofileComponent, LoginComponent
+    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent, NotFoundComponent, HeaderComponent, FollowerComponent, GithubprofileComponent, LoginComponent, HomeComponent, OrderComponent
   ],
   imports: [
     BrowserModule,

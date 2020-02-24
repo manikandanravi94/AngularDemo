@@ -7,13 +7,21 @@ import { FollowerComponent } from './follower/follower.component';
 import { GithubprofileComponent } from './githubprofile/githubprofile.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {
     path:"", component: HeaderComponent
   },
   {
+    path:"home", component: HomeComponent
+  },
+  {
     path: "courses", component: CoursesComponent
+  },
+  {
+    path:"order", component:OrderComponent
   },
   {
     path: "signup", component: SignupFormComponentComponent

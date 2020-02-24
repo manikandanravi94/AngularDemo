@@ -12,7 +12,7 @@ import { DataService } from './Dataservice.service';
 })
 export class CoursesComponent implements OnInit {
 
-  constructor(private DataService: DataService) {
+  constructor(private dataService: DataService) {
     
    }
 
@@ -30,7 +30,7 @@ method vl b executed*/
   //   }
 
   getServiceList(){
-    this.DataService.getUsersList(this.url).subscribe(response =>{
+    this.dataService.get(this.url).subscribe(response =>{
       this.serviceUserList=response;
     });
     }
@@ -42,8 +42,8 @@ method vl b executed*/
     */
     postUser(input:HTMLInputElement){
       let post={title: input.value};
-      let postResponse=this.DataService
-.postUser(this.url,JSON.stringify(post));
+      let postResponse=this.dataService
+.post(this.url,JSON.stringify(post));
       postResponse.subscribe(response=>{
         post['name']=response.id;
         this.serviceUserList.splice(0,0,post);
@@ -51,16 +51,16 @@ method vl b executed*/
     }
 
     updateUser(postObj){
-      let updateResponse=this.DataService
-.updateUser(this.url,postObj);
+      let updateResponse=this.dataService
+.update(this.url,postObj);
       updateResponse.subscribe(response =>{
         console.log(response);
       })
     }
 
     deleteUser(postObj){
-     this.DataService
-.deleteUser(this.url,postObj.id).subscribe(response =>{
+     this.dataService
+.delete(this.url,postObj.id).subscribe(response =>{
        console.log(response);
        let index = this.serviceUserList.indexOf(postObj);
        this.serviceUserList.splice(index,1)

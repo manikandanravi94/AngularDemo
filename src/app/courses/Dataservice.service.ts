@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { stringify } from 'querystring';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { ServiceParam } from '../common/serviceParam';
 //@Injectable is added to the service, it is because if this constructor hav any dependency it need to be
 // injected internally. we r not adding this annotation to component because it itself internally calls the 
 // injectable annotation
@@ -21,7 +22,7 @@ export class DataService {
   something, b4 fetching the value from the service.. return statment will get executed.. we should handle the subscribe
 event at the component
   */
-  // getUsersList(fn):any{
+  // getMethod(fn):any{
   //   this.http.get(this.url)
   //   .subscribe(response => {
   //    this.usersList=response;
@@ -35,15 +36,21 @@ event at the component
     })
   };
 
-  getUsersList(url):any{
+  get(url,serviceParam?:ServiceParam):any{
     /*below commented can be applied to each service specifically not to all the service commonly and 
      hence this is not a proper way of coding,we can achieve the common way by httpinterceptor
    return this.http.get(url).pipe(retry(1),catchError(this.handleError));
      */
-    return this.http.get(url);
+   let httpGetOption = {
+      headers: new HttpHeaders({
+        
+      })
+    };
+    let headers=serviceParam.headers;
+    return this.http.get(url,httpGetOption);
   }
 
-  postUser(url:string,body):any{
+  post(url:string,body):any{
     return this.http.post(url,body,this.httpOptions);
   }
   handleError(error: any): any {
@@ -59,11 +66,11 @@ else{
     return throwError(errorMessage);
   }
 
-  updateUser(url:string,body):any{
+  update(url:string,body):any{
     return this.http.patch(url + '/' +body.id, JSON.stringify({name:"anbu"}));
   }
 
-  deleteUser(url:string,param):any{
+  delete(url:string,param):any{
     return this.http.delete(url +'/'+param);
   }
 }

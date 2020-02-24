@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: DataService, private router: Router) { }
+  constructor(private service: DataService, private route: Router) { }
 
   ngOnInit() {
   }
@@ -31,18 +31,23 @@ export class LoginComponent implements OnInit {
   body:any;
 
   url: string = "http://localhost:8090/demo/api/authenticate";
+
+  invalidUser:boolean;
   
   submitForm(){
     this.body={username:
       this.username.value,
       password: this.password.value
     };
-     this.service.postUser(this.url,JSON.stringify(this.body)).subscribe(response =>{
+     this.service.post(this.url,JSON.stringify(this.body)).subscribe(response =>{
     if(response.status=="OK"){
-      
+      localStorage.setItem('token',response.token);
+      this.route.navigate(['/home']);
     }   
+    else{
+       this.invalidUser=true;
+    }
     }
      );
   }
-
 }

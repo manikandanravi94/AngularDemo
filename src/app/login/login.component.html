@@ -1,8 +1,7 @@
-<p>
-  login works!
-</p>
+<h1>Login</h1>
 <form [formGroup]="form" (ngSubmit)="submitForm()">
   <div class="form-group">
+    <div *ngIf="invalidUser">Either entered username or password is invalid</div>
     <label for="username">UserName</label>
 <input class="form-control" type="text" formControlName="username" name="username" id="username"/>
 <div *ngIf="username.touched&&username.invalid">
