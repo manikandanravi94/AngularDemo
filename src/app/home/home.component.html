@@ -1,11 +1,35 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="collapse navbar-collapse" id="navbarsExample03">
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
+       Example for routing
+           <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
           routerLink="/courses">CoursesBasic</a></li>
       <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
         routerLink="/order">Orders</a></li>
-        <button class="btn btn-primary" (click)="logout()">Logout</button>
+      <li class="nav-item" *ngIf="isLoggedIn() && user.role=='admin'" [class.active]="viewMode=='courseBasics'"><a
+          class="nav-link" (click)="viewMode='courseBasics'">CourseBasics</a></li>
+      <li class="nav-item" *ngIf="!isLoggedIn()" [class.active]="viewMode=='login'"><a class="nav-link"
+          (click)="viewMode='login'">login</a></li>
+      <li class="nav-item" *ngIf="isLoggedIn() && user.role=='admin'" [class.active]="viewMode=='courses'"><a
+          class="nav-link" (click)="viewMode='courses'">courses</a></li>
+      <button class="btn btn-primary" *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
     </ul>
   </div>
 </nav>
+<br>
+<div [ngSwitch]="viewMode">
+  <div *ngIf="isLoggedIn() && user.role=='admin'">
+    <div *ngSwitchCase="'courseBasics'">
+      <app-courses></app-courses>
+    </div>
+    <div *ngIf="!isLoggedIn()">
+      <div *ngSwitchCase="'login'">
+        <app-login></app-login>
+     </div>
+    </div>
+    <div *ngIf="isLoggedIn()">
+    <div *ngSwitchCase="'courses'">
+      <app-order></app-order>
+    </div>
+    </div>
+  </div> -->

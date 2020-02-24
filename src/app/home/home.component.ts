@@ -13,17 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  logout(){
-    localStorage.removeItem("token");
-    this.route.navigate(["/login"]);
-  }
-
-  isLoggedIn():boolean{
-    let token = localStorage.getItem("token");
-
-    if(!token)
-    return false;
-  }
+  
 
 
 

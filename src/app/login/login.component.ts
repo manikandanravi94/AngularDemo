@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../courses/Dataservice.service';
 import { Router } from '@angular/router';
+import { HeadershareService } from '../common/headershare.service';
+
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: DataService, private route: Router) { }
+  constructor(private service: DataService, private route: Router, private headerShare: HeadershareService) { }
 
   ngOnInit() {
   }
@@ -42,6 +44,7 @@ export class LoginComponent implements OnInit {
      this.service.post(this.url,JSON.stringify(this.body)).subscribe(response =>{
     if(response.status=="OK"){
       localStorage.setItem('token',response.token);
+      this.headerShare.updateLoginDetail();
       this.route.navigate(['/home']);
     }   
     else{

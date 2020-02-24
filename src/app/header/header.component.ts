@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
+import { HeadershareService } from '../common/headershare.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: Router, private headerShareService : HeadershareService) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    localStorage.removeItem("token");
+    this.route.navigate(["/login"]);
+    this.headerShareService.userLoggedIn=false;
+  }
+
+ 
+
+  get user(){
+    return new JwtHelperService().decodeToken(localStorage.getItem("token"));
   }
 
 }

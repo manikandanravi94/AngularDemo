@@ -9,19 +9,23 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
+import { Authguard } from './common/authguard.service';
 
 const routes: Routes = [
   {
-    path:"", component: HeaderComponent
+    path:"", component: LoginComponent
+  },
+  {
+    path:"header", component: HeaderComponent
   },
   {
     path:"home", component: HomeComponent
   },
   {
-    path: "courses", component: CoursesComponent
+    path: "courses", component: CoursesComponent, canActivate : [Authguard]
   },
   {
-    path:"order", component:OrderComponent
+    path:"order", component:OrderComponent, canActivate : [Authguard]
   },
   {
     path: "signup", component: SignupFormComponentComponent

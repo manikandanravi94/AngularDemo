@@ -12,11 +12,11 @@ export class OrderComponent implements OnInit {
 
   ngOnInit() {
     this.service.get(this.url).subscribe(response =>{
-      this.orderList=response;
+      this.courseList=response;
     })
   }
 
-  url: string ="http://localhost:8090/demo/api/order"
+  url: string ="http://localhost:8090/demo/api/courses"
 
-  orderList:string[];
+  courseList:string[];
 }

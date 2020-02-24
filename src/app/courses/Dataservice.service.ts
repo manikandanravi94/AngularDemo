@@ -46,7 +46,7 @@ event at the component
         
       })
     };
-    let headers=serviceParam.headers;
+    //let headers=serviceParam.headers;
     return this.http.get(url,httpGetOption);
   }
 

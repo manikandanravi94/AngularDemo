@@ -19,6 +19,7 @@ import { GithubprofileComponent } from './githubprofile/githubprofile.component'
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
+import { Authguard } from './common/authguard.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { OrderComponent } from './order/order.component';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    }],
+    },Authguard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
