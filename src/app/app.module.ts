@@ -20,11 +20,15 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
 import { Authguard } from './common/authguard.service';
+import { Adminauthguard } from './common/adminauthguard.service';
+import { NoaccessComponent } from './noaccess/noaccess.component';
+import { FooterComponent } from './footer/footer.component';
+import { DeveloperprofileComponent } from './developerprofile/developerprofile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent, NotFoundComponent, HeaderComponent, FollowerComponent, GithubprofileComponent, LoginComponent, HomeComponent, OrderComponent
+    CoursesComponent,SummaryPipe, FavouriteComponent, InputformatDirective, SignupFormComponentComponent, NotFoundComponent, HeaderComponent, FollowerComponent, GithubprofileComponent, LoginComponent, HomeComponent, OrderComponent, NoaccessComponent, FooterComponent, DeveloperprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ import { Authguard } from './common/authguard.service';
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    },Authguard],
+    },Authguard,Adminauthguard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

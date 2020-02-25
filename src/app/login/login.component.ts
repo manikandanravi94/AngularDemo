@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DataService } from '../courses/Dataservice.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HeadershareService } from '../common/headershare.service';
 
 
@@ -12,8 +12,11 @@ import { HeadershareService } from '../common/headershare.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: DataService, private route: Router, private headerShare: HeadershareService) { }
-
+  constructor(private service: DataService, private route: Router, private headerShare: HeadershareService
+    ,private activateRoute: ActivatedRoute) { }
+//activatedroute is used to get the query param passed from the auth guard service.. 
+// snapshot of the url which was clicked earlier can be accessed here.. this will help them to redirect 
+// to corresponding url after login
   ngOnInit() {
   }
 
@@ -43,9 +46,10 @@ export class LoginComponent implements OnInit {
     };
      this.service.post(this.url,JSON.stringify(this.body)).subscribe(response =>{
     if(response.status=="OK"){
+      let returnUrl=this.activateRoute.snapshot.queryParamMap.get('returnUrl');
       localStorage.setItem('token',response.token);
       this.headerShare.updateLoginDetail();
-      this.route.navigate(['/home']);
+      this.route.navigate([returnUrl || '/home']);
     }   
     else{
        this.invalidUser=true;

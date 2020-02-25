@@ -11,7 +11,7 @@
           <!-- As authentication is implemeted course is taken inside(means not shown outside) login page-->
       <!-- <li class="nav-item" routerLinkActive="active current"><a class="nav-link"
           routerLink="/courses">Courses</a></li> -->
-          <li class="nav-item" *ngIf="headerShareService.userLoggedIn && user.role=='admin'"><a class="nav-link"
+          <li class="nav-item" *ngIf="headerShareService.userLoggedIn && headerShareService.user.role=='admin'"><a class="nav-link"
             routerLink="/courses">AngularBasics</a></li>
         <li class="nav-item" *ngIf="headerShareService.userLoggedIn" routerLinkActive="active current"><a class="nav-link"
           routerLink="/order">Courses Learning</a></li>
@@ -21,4 +21,4 @@
     </ul>
   </div>
 </nav>
-<div *ngIf="headerShareService.userLoggedIn">Welcome back {{user.name}}</div>
+<div *ngIf="headerShareService.userLoggedIn">Welcome back {{headerShareService.user.name}}</div>

@@ -35,4 +35,8 @@ export class HeadershareService {
    // console.log(isExpired);
    return true;
   }
+
+  get user(){
+    return new JwtHelperService().decodeToken(localStorage.getItem("token"));
+  }
 }

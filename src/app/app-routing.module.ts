@@ -10,6 +10,9 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
 import { Authguard } from './common/authguard.service';
+import { NoaccessComponent } from './noaccess/noaccess.component';
+import { Adminauthguard } from './common/adminauthguard.service';
+import { DeveloperprofileComponent } from './developerprofile/developerprofile.component';
 
 const routes: Routes = [
   {
@@ -22,7 +25,7 @@ const routes: Routes = [
     path:"home", component: HomeComponent
   },
   {
-    path: "courses", component: CoursesComponent, canActivate : [Authguard]
+    path: "courses", component: CoursesComponent, canActivate : [Authguard,Adminauthguard]
   },
   {
     path:"order", component:OrderComponent, canActivate : [Authguard]
@@ -34,11 +37,17 @@ const routes: Routes = [
     path:"login", component: LoginComponent
   },
   {
+    path:"no-access", component: NoaccessComponent
+  },
+  {
     path: "follower/:course", component: FollowerComponent
   },
   {
     path: "githubprofile", component: GithubprofileComponent
   },  
+  {
+    path: "developerprofile", component: DeveloperprofileComponent
+  },
   {
     path: "**", component: NotFoundComponent
   }

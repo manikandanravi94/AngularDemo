@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate } from '@angular/router';
+import { Router, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { HeadershareService } from './headershare.service';
 
 @Injectable({
@@ -12,11 +12,11 @@ export class Authguard implements CanActivate {
 //This concept is useful in preventing url navigation without login
   constructor(private route:Router, private headerShareService: HeadershareService) { }
 
-  canActivate(){
+  canActivate(route, state:RouterStateSnapshot){
     if(this.headerShareService.isLoggedIn())
-    return true;
+     return true;
 
-    this.route.navigate(["/login"]);
+    this.route.navigate(["/login"],{queryParams: {returnUrl: state.url}});
     return false;
   }
   

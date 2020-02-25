@@ -23,8 +23,6 @@ export class HeaderComponent implements OnInit {
 
  
 
-  get user(){
-    return new JwtHelperService().decodeToken(localStorage.getItem("token"));
-  }
+ 
 
 }
